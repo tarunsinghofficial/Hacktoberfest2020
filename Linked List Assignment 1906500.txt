@@ -1,0 +1,1569 @@
+Name : Samim Hossain Mondal
+Roll : 1906500
+Branch : IT (IT-06)
+Subject : Linked List Assignment.
+
+
+Q1.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start;
+void in_end(int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(start==NULL)
+    start=temp;
+    else
+    {
+        q=start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void swap(int x, int y)
+{
+   if (x == y)
+    return;
+   struct node *prevx = NULL, *currx = start;
+   while( currx->x != x)
+   {
+       prevx = currx;
+       currx = currx->next;
+   }
+   struct node *prevy = NULL, *curry = start;
+   while (curry->x != y)
+   {
+       prevy = curry;
+       curry = curry->next;
+   }
+   if (currx == NULL || curry == NULL)
+       return;
+   if (prevx != NULL)
+       prevx->next = curry;
+   else 
+       start = curry;  
+   if (prevy != NULL)
+       prevy->next = currx;
+   else 
+       start = currx;
+   struct node *temp = curry->next;
+   curry->next = currx->next;
+   currx->next  = temp;
+}
+void main()
+{
+    int n,x,a,b;
+    start=NULL;
+    struct node *p;
+    printf("enter the number of element\n");
+    scanf("%d",&n);
+    printf("enter the numbers\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x);
+    }
+    printf("enter the two element\n");
+    scanf("%d%d",&a,&b);
+    swap(a,b);
+    p=start;
+    while(p!=NULL)
+    {
+        printf("%d ",p->x);
+        p=p->next;
+    }
+}
+
+Q2.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start;
+void in_end(int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(start==NULL)
+    start=temp;
+    else
+    {
+        q=start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void k_from_end(int k)
+{
+    struct node *p,*q;
+    p=q=start;
+    for(int i=0;i<k;i++)
+        p=p->next;
+    while(p!=NULL)
+    {
+        p=p->next;
+        q=q->next;
+    }
+    printf("kth node from last info is : %d",q->x);
+}
+void main()
+{
+    int n,x,k;
+    start=NULL;
+    struct node *p;
+    printf("enter the number of element\n");
+    scanf("%d",&n);
+    printf("enter the numbers\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x);
+    }
+    printf("enter the kth node from last\n");
+    scanf("%d%d",&k);
+    p=start;
+    while(p!=NULL)
+    {
+        printf("%d ",p->x);
+        p=p->next;
+    }
+    k_from_end(k);
+}
+
+Q3.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start;
+void in_end(int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(start==NULL)
+    start=temp;
+    else
+    {
+        q=start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void del_allnode()
+{
+    struct node *p;
+    if(start==NULL)
+        printf("List is empty.");
+    else
+    {   p=start;
+        for(;p!=NULL;)
+        {
+            start=start->next;
+            p->next=NULL;
+            free(p);
+            p=start;
+        }
+    }
+}
+void main()
+{
+    int n,x,k;
+    start=NULL;
+    struct node *p;
+    printf("enter the number of element\n");
+    scanf("%d",&n);
+    printf("enter the numbers\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x);
+    }
+    del_allnode();
+}
+
+Q4.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start;
+void in_end(int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(start==NULL)
+    start=temp;
+    else
+    {
+        q=start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void breakloop(struct node *q)
+{
+    struct node *p=start;
+    while(p!=q)
+    {
+        p=p->next;
+        q=q->next;
+    }
+    printf("loop start info = %d \n",p->x);
+    while(q->next!=p)
+    {
+        q=q->next;
+    }
+    q->next=NULL;
+}
+void isloop()
+{
+    struct node *p,*q;
+    p=q=start;
+    while(p!=NULL && q->next!=NULL)
+    {
+        p=p->next;
+        q=q->next->next;
+        if(p==q)
+            breakloop(q);
+    }
+}
+void main()
+{
+    int n,x,k;
+    start=NULL;
+    struct node *p,*q;
+    printf("enter the number of element at least 10\n");
+    scanf("%d",&n);
+    printf("enter the numbers\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x);
+    }
+    printf("creating loop at 6th node \n");
+    q=start;
+    while(q->next!=NULL)
+        q=q->next;
+    p=start;
+    for(int i=0;i<5;i++)
+        p=p->next;
+    q->next=p;
+    isloop();
+    p=start;
+    while(p!=NULL)
+    {
+        printf("%d ",p->x);
+        p=p->next;
+    }
+}
+
+Q5.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start,*start2;
+void in_end(int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(start==NULL)
+    start=temp;
+    else
+    {
+        q=start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void reverse() 
+{ 
+    struct node* prev = NULL; 
+    struct node* current = start2; 
+    struct node* next = NULL; 
+    while (current != NULL) 
+    { 
+        next = current->next; 
+        current->next = prev;  
+        prev = current; 
+        current = next; 
+    } 
+    start2 = prev; 
+} 
+void palindrom()
+{
+    int c;
+    struct node *q=start,*p=start,*prev;
+    while(q!=NULL && q->next!=NULL)
+    {
+        prev=p;
+        p=p->next;
+        q=q->next->next;
+    }
+    prev->next=NULL;
+    start2=p;
+    reverse();
+    p=start;
+    q=start2;
+    while(p!=NULL)
+    {
+        if(p->x==q->x)
+            c=1;
+        else
+            c=0;
+        p=p->next;
+        q=q->next;
+    }
+    if(c==1)
+        printf("palindrom \n");
+    else
+        printf("enot a palindrom \n");
+
+}
+void main()
+{
+    int n,k;
+    int x;
+    start=start2=NULL;
+    printf("enter the number of element of ll \n");
+    scanf("%d",&n);
+    printf("enter the numbers in sorted order of ll\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x);
+    }
+    palindrom();
+}
+
+Q6.
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct node
+{
+    int x;
+    struct node *next;
+};
+void in_end(int x,struct node **start)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(*start==NULL)
+    *start=temp;
+    else
+    {
+        q=*start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void For_Back_reccursive(struct node *s)
+{
+    if(s!=NULL)
+    {
+        printf("%d ",s->x);
+        For_Back_reccursive(s->next);
+        printf("%d ",s->x);
+    }
+}
+void main()
+{
+    int n,x,k,c;
+    struct node *start,*start2,*p,*q,*prev;
+    start=NULL;
+    start2=NULL;
+    printf("enter the number of element\n");
+    scanf("%d",&n);
+    printf("enter the numbers\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x,&start);
+    }
+    For_Back_reccursive(start);
+}
+
+
+
+
+
+Q7.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start;
+void in_end(int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(start==NULL)
+    start=temp;
+    else
+    {
+        q=start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+struct node *reverseingroup(int k) 
+{ 
+    struct node* prev = NULL; 
+    struct node* curr = start; 
+    struct node* temp = NULL; 
+    struct node* tail = NULL; 
+    struct node* newstart = NULL; 
+    struct node* join = NULL; 
+    int t = 0;  
+    while (curr) { 
+        t = k; 
+        join = curr; 
+        prev = NULL; 
+        while (curr && t--) { 
+            temp = curr->next; 
+            curr->next = prev; 
+            prev = curr; 
+            curr = temp; 
+        } 
+        if (!newstart) 
+            newstart = prev; 
+        if (tail) 
+            tail->next = prev; 
+        tail = join; 
+    }
+    return newstart;  
+} 
+void display(struct node* start)
+{
+    struct node *q=start;
+    while(q!=NULL)
+    {
+        printf("%d ",q->x);
+        q=q->next;
+    }
+}
+void main()
+{
+    int n,x,k;
+    start=NULL;
+    printf("enter the number of element of ll \n");
+    scanf("%d",&n);
+    printf("enter the numbers  of ll\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x);
+    }
+    printf("enter the group \n");
+    scanf("%d",&k);
+    start=reverseingroup(k);
+    display(start);
+}
+
+
+Q8.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start;
+void in_end(int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(start==NULL)
+    start=temp;
+    else
+    {
+        q=start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void oddeven(int n)
+{
+    struct node *q=start,*prev=NULL;
+    for(int i=0;i<n;i++)
+    {
+        if(q->x%2==0)
+        {
+            if(prev==NULL)
+            {
+                in_end(q->x);
+                start=start->next;
+                free(q);
+                q=start;
+            }
+            else
+            {
+                prev->next=q->next;
+                in_end(q->x);
+                free(q);
+                q=prev->next;
+            }
+        }
+        else
+        {
+            prev=q;
+            q=q->next;
+        }
+    }
+}
+void display(struct node* start)
+{
+    struct node *q=start;
+    while(q!=NULL)
+    {
+        printf("%d ",q->x);
+        q=q->next;
+    }
+}
+void main()
+{
+    int n,x;
+    start=NULL;
+    printf("enter the number of element of ll \n");
+    scanf("%d",&n);
+    printf("enter the numbers of ll\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x);
+    }
+    oddeven(n);
+    display(start);
+}
+
+Q9.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start;
+void in_beg(int x)
+{
+    struct node *temp;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=start;
+    start=temp;
+}
+void in_end(int x,struct node **start)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(*start==NULL)
+    *start=temp;
+    else
+    {
+        q=*start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void meargesort(struct node *s1,struct node *s2)
+{
+    while(s1!=NULL && s2!=NULL)
+    {
+        if(s1->x<s2->x)
+        {
+            in_beg(s1->x);
+            s1=s1->next;
+        }
+        else
+        {
+            in_beg(s2->x);
+            s2=s2->next;
+        }
+    }
+    if(s1!=NULL)
+        for(;s1!=NULL;s1=s1->next)
+            in_beg(s1->x);
+    else
+        for(;s2!=NULL;s2=s2->next)
+            in_beg(s2->x);
+}
+
+void main()
+{
+    int n,x;
+    struct node *start1,*start2,*q;
+    start=start1=start2=NULL;
+    for(int j=1;j<=2;j++)
+    {
+        printf("enter the number of element of ll %d \n",j);
+        scanf("%d",&n);
+        printf("enter the numbers in sorted order of ll %d\n",j);
+        for(int i=0;i<n;i++)
+        {
+            scanf("%d",&x);
+            if(j==1)
+                in_end(x,&start1);
+            if(j==2)
+                in_end(x,&start2);
+        }
+    }
+    meargesort(start1,start2);
+    printf("mearged LL in reverse order :\n");
+    q=start;
+    while(q!=NULL)
+    {
+        printf("%d ",q->x);
+        q=q->next;
+    }
+}
+
+Q10.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+};
+void in_end(int x,struct node **start)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(*start==NULL)
+    *start=temp;
+    else
+    {
+        q=*start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void display(struct node* start)
+{
+    struct node *q=start;
+    while(q!=NULL)
+    {
+        printf("%d ",q->x);
+        q=q->next;
+    }
+}
+void main()
+{
+    int n,x,k;
+    struct node *start1,*start2,*p,*q;
+    start1=start2=NULL;
+    for(int j=1;j<=2;j++)
+    {
+        printf("enter the number of element of ll %d \n",j);
+        scanf("%d",&n);
+        printf("enter the numbers in sorted order of ll %d\n",j);
+        for(int i=0;i<n;i++)
+        {
+            scanf("%d",&x);
+            if(j==1)
+                in_end(x,&start1);
+            if(j==2)
+                in_end(x,&start2);
+        }
+    }
+    struct node *prev1,*prev2,*s1,*s2;
+    if(start1->x<start2->x)
+    {
+        s1=start1;
+        s2=start2;
+    }
+    else
+    {
+        s1=start2;
+        s2=start1;
+    }
+    while(s1!=NULL && s2!=NULL)
+    {
+        if((s1)->x<(s2)->x)
+        {
+            prev1=s1;
+            s1=(s1)->next;
+        }
+        else
+        {
+            prev2=s2;
+            prev1->next=s2;
+            s2=(s2)->next;
+            prev2->next=s1;
+        }
+    }
+    if(s2!=NULL)
+        prev1->next=s2;
+    printf("mearged LL in place :\n");
+    if(start1->x<start2->x)
+    {
+        display(start1);
+    }
+    else
+    {
+        display(start2);
+    }
+}
+
+Q11.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start;
+void in_end(int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(start==NULL)
+    start=temp;
+    else
+    {
+        q=start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void oddeven(int n)
+{
+    struct node *q=start,*prev;
+    for(int i=1;i<=n;i++)
+    {
+        if(i%2==0)
+        {
+             prev->next=q->next;
+            in_end(q->x);
+            free(q);
+            q=prev->next;
+        }
+        else
+        {
+            prev=q;
+            q=q->next;
+        }
+    }
+}
+void display(struct node* start)
+{
+    struct node *q=start;
+    while(q!=NULL)
+    {
+        printf("%d ",q->x);
+        q=q->next;
+    }
+}
+void main()
+{
+    int n,x;
+    start=NULL;
+    printf("enter the number of element of ll \n");
+    scanf("%d",&n);
+    printf("enter the numbers of ll\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x);
+    }
+    oddeven(n);
+    display(start);
+}
+
+Q12.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start;
+void in_end(int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(start==NULL)
+    start=temp;
+    else
+    {
+        q=start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void oddeven(int n)
+{
+    struct node *q=start,*prev=NULL;
+    for(int i=0;i<n;i++)
+    {
+        if(q->x%2==0)
+        {
+            if(prev==NULL)
+            {
+                in_end(q->x);
+                start=start->next;
+                free(q);
+                q=start;
+            }
+            else
+            {
+                prev->next=q->next;
+                in_end(q->x);
+                free(q);
+                q=prev->next;
+            }
+        }
+        else
+        {
+            prev=q;
+            q=q->next;
+        }
+    }
+}
+void display(struct node* start)
+{
+    struct node *q=start;
+    while(q!=NULL)
+    {
+        printf("%d ",q->x);
+        q=q->next;
+    }
+}
+void main()
+{
+    int n,x;
+    start=NULL;
+    printf("enter the number of element of ll \n");
+    scanf("%d",&n);
+    printf("enter the numbers  of ll\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x);
+    }
+    oddeven(n);
+    display(start);
+}
+
+Q13.
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start;
+void in_end(int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(start==NULL)
+    start=temp;
+    else
+    {
+        q=start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+  
+struct node *reverse(struct node * node) 
+{ 
+    if (node == NULL) 
+        return NULL; 
+    if (node->next == NULL) { 
+        start = node; 
+        return node; 
+    } 
+    struct node *node1 = reverse(node->next); 
+    node1->next = node; 
+    node->next = NULL; 
+    return node; 
+} 
+
+void main()
+{
+    int n,x,k,c;
+    struct node *p;
+    start=NULL;
+    printf("enter the number of element\n");
+    scanf("%d",&n);
+    printf("enter the numbers\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x);
+    }
+    p=start;
+    while(p!=NULL)
+    {
+        printf("%d ",p->x);
+        p=p->next;
+    }
+    reverse(start);
+    p=start;
+    while(p!=NULL)
+    {
+        printf("%d ",p->x);
+        p=p->next;
+    }
+}
+
+
+
+
+
+
+
+
+
+Q14.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+};
+void in_end(int x,struct node **start)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(*start==NULL)
+    *start=temp;
+    else
+    {
+        q=*start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void findunion(struct node *start1,struct node *start2)
+{
+    struct node *q,*p,*prev;
+    printf("union : ");
+    for(p=start1;p->next!=NULL;p=p->next);
+    p->next=start2;
+    for(p=start1;p->next!=NULL;p=p->next)
+    {
+        prev=p;
+        for(q=p->next;q!=NULL;)
+            if(p->x!=q->x)
+            {
+                prev=q;
+                q=q->next;
+            }
+            else
+            {
+                prev->next=q->next;
+                free(q);
+                q=prev->next;
+            }
+    }
+    p=start1;
+    while(p!=NULL)
+    {
+        printf("%d ",p->x);
+        p=p->next;
+    }
+}
+void main()
+{
+    int n,x,k;
+    struct node *start1,*start2;
+    start1=start2=NULL;
+    for(int j=1;j<=2;j++)
+    {
+        printf("enter the number of element of ll %d \n",j);
+        scanf("%d",&n);
+        printf("enter the numbers of ll %d\n",j);
+        for(int i=0;i<n;i++)
+        {
+            scanf("%d",&x);
+            if(j==1)
+                in_end(x,&start1);
+            if(j==2)
+                in_end(x,&start2);
+        }
+    }
+    findunion(start1,start2);
+}
+
+Q15.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+};
+void in_end(int x,struct node **start)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(*start==NULL)
+    *start=temp;
+    else
+    {
+        q=*start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void intersection(struct node *start1,struct node *start2)
+{
+    struct node *q,*p;
+    printf("intersection : ");
+    for(p=start1;p!=NULL;p=p->next)
+        for(q=start2;q!=NULL;q=q->next)
+            if(p->x==q->x)
+                printf("%d ",p->x);
+}
+void main()
+{
+    int n,x,k;
+    struct node *start1,*start2;
+    start1=start2=NULL;
+    for(int j=1;j<=2;j++)
+    {
+        printf("enter the number of element of ll %d \n",j);
+        scanf("%d",&n);
+        printf("enter the numbers of ll %d\n",j);
+        for(int i=0;i<n;i++)
+        {
+            scanf("%d",&x);
+            if(j==1)
+                in_end(x,&start1);
+            if(j==2)
+                in_end(x,&start2);
+        }
+    }
+    intersection(start1,start2);
+}
+
+
+Q16.
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct node
+{
+    int x;
+    struct node *next;
+};
+void in_beg(int x,struct node **start)
+{
+    struct node *temp;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=*start;
+    *start=temp;
+}
+void in_end(struct node **start3,int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(*start3==NULL)
+    *start3=temp;
+    else
+    {
+        q=*start3;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+int length(struct node *start)
+{
+    struct node *q=start;
+    int c=0;
+    while(q!=NULL)
+    {
+        c++;
+        q=q->next;
+    }
+    return c;
+}
+struct node *Subtract(struct node *start1, struct node *start2)
+{
+    int l1,l2;
+    l1=length(start1);
+    l2=length(start2);
+    for(int i=0;i<l1-l2;i++)
+        in_end(&start2,0);
+    struct node *start3=NULL,*p = start1, *q = start2, *k, *r;
+    while(p != NULL && q != NULL) 
+    {
+        if(p ->x >= q-> x) 
+        {
+            in_end(&start3,p->x - q->x);
+            p = p ->next;
+            q= q -> next;
+        }
+        else if(p -> next->x >0)
+        { 
+            p -> x = p ->x + 10;
+            p -> next -> x = p -> next -> x -1;
+        }
+        else
+        {
+            k = p -> next;
+            while (k -> x == 0) 
+            k= k -> next;
+            p -> x = p -> x + 10;
+            for( r= p -> next; r != k; r = r -> next)
+            r-> x =9;
+            k -> x = k -> x -1;
+        }
+    }
+    return start3;
+ }
+ void display(struct node *s)
+{
+    if(s!=NULL)
+    {
+        display(s->next);
+        printf("%d ",s->x);
+    }
+}
+ void main()
+{
+    int n,x;
+    struct node *start1,*start2,*start3;
+    start1=NULL;
+    start2=NULL;
+    start3=NULL;
+    printf("enter the number of element of ll 1\n");
+    scanf("%d",&n);
+    printf("enter the numbers of ll 1\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_beg(x,&start1);
+    }
+    printf("enter the number of element of ll 2\n");
+    scanf("%d",&n);
+    printf("enter the numbers of ll 2\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_beg(x,&start2);
+    }
+    start3=Subtract(start1,start2);
+    display(start1);
+    display(start2);
+    display(start3);
+}
+
+Q17.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+};
+void push(int x,struct node **top)
+{
+    struct node *temp;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=*top;
+    *top=temp;
+}
+int pop(struct node **top)
+{
+    int val;
+    struct node *temp;
+    if(*top==NULL)
+        val=0;
+    else
+    {
+        temp=*top;
+        *top=(*top)->next;
+        val=temp->x;
+        free(temp);
+    }
+    return val;
+}
+struct node *add(struct node *top1,struct node *top2)
+{
+    struct node *top3=NULL;
+    int val,carry=0;
+    while(top1!=NULL || top2!=NULL)
+    {
+        val=pop(&top1)+pop(&top2)+carry;
+        carry=0;
+        if(val>9)
+        {
+            carry=1;
+            val=val%10;
+        }
+        push(val,&top3);
+    }
+    if(carry==1)
+        push(1,&top3);
+
+    return top3;
+}
+void main()
+{
+    int n,x,val;
+    struct node *top1,*top2,*top3;
+    top1=top2=top3=NULL;
+    for(int j=1;j<=2;j++)
+    {
+        printf("enter the number of digits in stack %d \n",j);
+        scanf("%d",&n);
+        printf("enter the numbers in stack %d\n",j);
+        for(int i=0;i<n;i++)
+        {
+            scanf("%d",&x);
+            if(j==1)
+                push(x,&top1);
+            if(j==2)
+                push(x,&top2);
+        }
+    }
+    printf("sum :\n");
+    top3=add(top1,top2);
+    while(top3!=NULL)
+    {
+        val=pop(&top3);
+        printf("%d ",val);
+    }
+}
+
+Q18.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start;
+void in_end(int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(start==NULL)
+    start=temp;
+    else
+    {
+        q=start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void partition(int n,int k)
+{
+    struct node *q=start,*prev=NULL;
+    for(int i=0;i<n;i++)
+    {
+        if(q->x>=k)
+        {
+            if(prev==NULL)
+            {
+                in_end(q->x);
+                start=start->next;
+                free(q);
+                q=start;
+            }
+            else
+            {
+                prev->next=q->next;
+                in_end(q->x);
+                free(q);
+                q=prev->next;
+            }
+        }
+        else
+        {
+            prev=q;
+            q=q->next;
+        }
+    }
+}
+void display(struct node* start)
+{
+    struct node *q=start;
+    while(q!=NULL)
+    {
+        printf("%d ",q->x);
+        q=q->next;
+    }
+}
+void main()
+{
+    int n,x,k;
+    struct node *p,*q;
+    start=NULL;
+    printf("enter the number of element of ll \n");
+    scanf("%d",&n);
+    printf("enter the numbers of ll\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x);
+    }
+    printf("enter the value x : \n");
+    scanf("%d",&k);
+    partition(n,k);
+    display(start);
+}
+
+Q19.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+};
+void in_end(int x,struct node **start)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(*start==NULL)
+    *start=temp;
+    else
+    {
+        q=*start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+int length(struct node *start)
+{
+    struct node *q=start;
+    int c=0;
+    while(q!=NULL)
+    {
+        c++;
+        q=q->next;
+    }
+    return c;
+}
+void  isintersection(struct node *start1,struct node *start2)
+{
+    struct node *q,*p;
+    int l1,l2,c=0;
+    l1=length(start1);
+    l2=length(start2);
+    if(l1>l2)
+    {
+        p=start1;
+        q=start2;
+        for(int i=0;i<l1-l2;i++)
+            p=p->next;
+    }
+    else
+    {
+        p=start1;
+        q=start2;
+        for(int i=0;i<l2-l1;i++)
+            q=q->next;
+    }
+    while(p!=NULL)
+    {
+        if(p==q)
+        {
+            c=1;
+            printf("intersection found at node info : %d",p->x);
+            break;
+        }
+        else
+            c++;
+        p=p->next;
+        q=q->next;
+    }
+    if(c!=1)
+        printf("intersection not found");
+}
+void main()
+{
+    int n,x,k;
+    struct node *start1,*start2,*p,*q;
+    start1=start2=NULL;
+    for(int j=1;j<=2;j++)
+    {
+        printf("enter the number of element of ll %d \n",j);
+        scanf("%d",&n);
+        printf("enter the numbers of ll %d\n",j);
+        for(int i=0;i<n;i++)
+        {
+            scanf("%d",&x);
+            if(j==1)
+                in_end(x,&start1);
+            if(j==2)
+                in_end(x,&start2);
+        }
+    }
+    printf("creating intersection");
+    p=start1;
+    for(int i=0;i<1;i++)
+        p=p->next;
+    q=start2;
+    while(q->next!=NULL)
+        q=q->next;
+    q->next=p->next;
+    isintersection(start1,start2);
+}
+
+Q20.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int x;
+    struct node *next;
+}*start;
+void in_end(int x)
+{
+    struct node *temp,*q;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->x=x;
+    temp->next=NULL;
+    if(start==NULL)
+    start=temp;
+    else
+    {
+        q=start;
+        while(q->next!=NULL)
+        q=q->next;
+        q->next=temp;
+    }
+}
+void pairswap()
+{
+    struct node *p=start,*q=p->next,*prev;
+    p->next=q->next;
+    q->next=p;
+    start=q;
+    prev=start->next;
+    p=prev->next;
+    
+    while(p!=NULL && p->next!=NULL)
+    {
+        q=p->next;
+        p->next=q->next;
+        prev->next=q;
+        q->next=p;
+        prev=prev->next->next;
+        p=prev->next;
+    }
+}
+void display(struct node* start)
+{
+    struct node *q=start;
+    while(q!=NULL)
+    {
+        printf("%d ",q->x);
+        q=q->next;
+    }
+}
+void main()
+{
+    int n,x;
+    start=NULL;
+    printf("enter the number of element of ll \n");
+    scanf("%d",&n);
+    printf("enter the numbers  of ll\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        in_end(x);
+    }
+    pairswap();
+    display(start);
+}
