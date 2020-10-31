@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Tuto</title>
+    <style>
+        .container{
+            height: 544px;
+            width: 100%;
+            border: 2px solid red;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .item{
+            width: 200px;
+            height: 200px;
+            background-color: tomato;
+            border: 2px solid red;
+            margin: 10px;
+            padding: 3px;
+        }
+        #item-1{
+            text-align: center;
+            align-content: middle;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Flexbox</h1>
+    <div class="container">
+    <div class="item" id="item-1">First</div>
+    <div class="item" id="item-2">Second</div>
+    <div class="item" id="item-3">Third</div>
+    <div class="item" id="item-4">Fourth</div>
+    <div class="item" id="item-5">Fifth</div>
+    <div class="item" id="item-6">Sixth</div>
+    </div>
+</body>
+</html>
